@@ -1,0 +1,468 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MES-LINK-VSKY</name>
+    </assembly>
+    <members>
+        <member name="M:MES_LINK_VSKY.Controllers.ASMController.test(System.String)">
+            <summary>
+            HTTP Post测试接口---默认返回 ASM
+            </summary>
+            <param name="va"></param>
+        </member>
+        <member name="M:MES_LINK_VSKY.Controllers.ASMController.check_reel(System.String)">
+            <summary>
+            HTTP Post接口---用于ASM取得Reel id相关信息
+            </summary>
+            <param name="reel"></param>
+        </member>
+        <member name="M:MES_LINK_VSKY.Controllers.ASMController.traceability(MES_LINK_VSKY.models.ASM.trace_asm)">
+            <summary>
+            HTTP Post接口---用于ASM上传Traceability信息
+            </summary>
+            <param name="model"></param>
+        </member>
+        <member name="M:MES_LINK_VSKY.Controllers.RASController.divboardsn(MES_LINK_VSKY.models.RAS.paramClass)">
+            <summary>
+            HTTP Post接口---用于H18树莓派自动分配小板码
+            </summary>
+            <param name="model"></param>
+        </member>
+        <member name="M:MES_LINK_VSKY.Controllers.RASController.didlinkfeeder(MES_LINK_VSKY.models.RAS.didClass)">
+            <summary>
+            HTTP Post接口---FUJI NXT料盘上料
+            </summary>
+            <param name="model"></param>
+        </member>
+        <member name="M:MES_LINK_VSKY.Controllers.ROBOTController.pcbainput1(MES_LINK_VSKY.models.ROBOT.pcba)">
+            <summary>
+            HTTP Post接口---BE段投板
+            </summary>
+            <param name="model"></param>
+        </member>
+        <member name="T:MES_LINK_VSKY.Controllers.VSKYController">
+            <summary>
+            MES与VSKY的API接口
+            </summary>
+        </member>
+        <member name="M:MES_LINK_VSKY.Controllers.VSKYController.test(System.String)">
+            <summary>
+            HTTP Post测试接口---默认返回 vsky
+            </summary>
+            <param name="va"></param>
+        </member>
+        <member name="M:MES_LINK_VSKY.Controllers.VSKYController.Vsky(MES_LINK_VSKY.models.VSKY.KitInput)">
+            <summary>
+            HTTP Post接口---用于by 工单上料 for vsky
+            </summary>
+            <remarks>参数范例：{"PanelID":"","ReelID":"377S00006-A120190726550008","Terminal_ID":610254,"CMD":0} </remarks>
+            <param name="model">KitInput类</param>
+            <returns>bool result</returns>
+        </member>
+        <member name="M:MES_LINK_VSKY.Controllers.VSKYController.checkreel(MES_LINK_VSKY.models.VSKY.kitreel)">
+            <summary>
+            HTTP Post接口---用于检查Reel是否被禁用
+            </summary>
+            <remarks>参数范例：{ "work_order": "HA50354","reelID": "HHHHHH","terminal_ID":100342,"cmd":1} </remarks>
+            <param name="reel">kitreel类</param>
+            <returns>MesReponse</returns>
+        </member>
+        <member name="M:MES_LINK_VSKY.Controllers.VSKYController.checkuser(MES_LINK_VSKY.models.VSKY.user_password)">
+            <summary>
+            HTTP Post接口---用于检查用户认证 for vsky
+            </summary>
+            <remarks>参数范例：{ "username": "HA50354","password": "HHHHHH"} </remarks>
+            <param name="user">user_password类</param>
+            <returns>MesReponse</returns>
+        </member>
+        <member name="M:MES_LINK_VSKY.Controllers.VSKYController.Check_privilege(MES_LINK_VSKY.models.VSKY.user_privilege)">
+            <summary>
+            HTTP Post接口---用于检查用户权限 for vsky
+            </summary>
+            <remarks>参数范例：{ "username": "HA50354","program": "Tooling Manager","function":"Stencil","authoritys":"Allow To Execute"}</remarks>
+            <param name="user">user_privilege类</param>
+            <returns>MesReponse</returns>
+        </member>
+        <member name="M:MES_LINK_VSKY.models.Appsetting.Initial(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            将配置项的值赋值给属性
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="T:MES_LINK_VSKY.models.ASM.ReelInfo">
+            <summary>
+            reelinfo
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.ReelInfo.reelID">
+            <summary>
+            ReelID--料盘唯一码
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.ReelInfo.partNum">
+            <summary>
+            料号
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.ReelInfo.partSpec">
+            <summary>
+            料号类型
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.ReelInfo.qty">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.ReelInfo.vendor">
+            <summary>
+            厂商
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.ReelInfo.vendorNum">
+            <summary>
+            厂商料号
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.ReelInfo.dataCode">
+            <summary>
+            厂商生产日期编码
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.ReelInfo.lotCode">
+            <summary>
+            厂商批号
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.ReelInfo.cmd">
+            <summary>
+            命令参数，暂未启用
+            </summary>
+        </member>
+        <member name="T:MES_LINK_VSKY.models.ASM.trace_asm">
+            <summary>
+            ASM贴片上传追溯资料类
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.trace_asm.placedTime">
+            <summary>
+            生产时间
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.trace_asm.panelSN">
+            <summary>
+            PCB条码
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.trace_asm.recipeName">
+            <summary>
+            程式名称
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.trace_asm.lineName">
+            <summary>
+            线名
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.trace_asm.machineName">
+            <summary>
+            机器名
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.trace_asm.conveyor">
+            <summary>
+            轨道号
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.trace_asm.reel_Units">
+            <summary>
+            Reel信息相关--类
+            </summary>
+        </member>
+        <member name="T:MES_LINK_VSKY.models.ASM.reel_unit">
+            <summary>
+            Reel信息相关--类
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.reel_unit.boardSN">
+            <summary>
+            小板条码
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.reel_unit.location">
+            <summary>
+            位置
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.reel_unit.track">
+            <summary>
+            Feeder位置
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.reel_unit.division">
+            <summary>
+            Feeder分区
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.reel_unit.tower">
+            <summary>
+            托盘料塔
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.reel_unit.level">
+            <summary>
+            托盘料层
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.reel_unit.reelID">
+            <summary>
+            ReelID--料盘唯一码
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.reel_unit.partNum">
+            <summary>
+            料号
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.reel_unit.reference">
+            <summary>
+            贴片点位，多个点位以逗号分隔
+            </summary>
+        </member>
+        <member name="T:MES_LINK_VSKY.models.ASM.trace_response">
+            <summary>
+            trace_response  -ASM
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.trace_response.isUploaded">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ASM.trace_response.message">
+            <summary>
+            信息
+            </summary>
+        </member>
+        <member name="T:MES_LINK_VSKY.models.MesReponse">
+            <summary>
+            通用响应
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.MesReponse.status">
+            <summary>
+            200 成功 500异常
+            </summary>
+        </member>
+        <member name="T:MES_LINK_VSKY.models.RAS.didClass">
+            <summary>
+            didClass
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.RAS.didClass.did">
+            <summary>
+            Reel ID
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.RAS.didClass.feedersn">
+            <summary>
+            feeder sn
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.RAS.didClass.username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.RAS.didClass.cmd">
+            <summary>
+            自定义参数0=默认不检查上一个料号是否正确，1=检查，2=清除feeder 绑定关系
+            </summary>
+        </member>
+        <member name="T:MES_LINK_VSKY.models.RAS.paramClass">
+            <summary>
+            paramClass
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.RAS.paramClass.panelid">
+            <summary>
+            panelid
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.RAS.paramClass.terminal_id">
+            <summary>
+            terminal_id
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.RAS.paramClass.wo">
+            <summary>
+            wo
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.RAS.paramClass.cmd">
+            <summary>
+            cmd
+            </summary>
+        </member>
+        <member name="T:MES_LINK_VSKY.models.RAS.rasresponseClass">
+            <summary>
+            rasresponseClass
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.RAS.rasresponseClass.result">
+            <summary>
+            result
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.RAS.rasresponseClass.message">
+            <summary>
+            message
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ROBOT.pcba.emp_no">
+            <summary>
+            人员工号
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ROBOT.pcba.wo">
+            <summary>
+            工单号
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ROBOT.pcba.panel_sn">
+            <summary>
+            Panel SN
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ROBOT.pcba.process_name">
+            <summary>
+            Process Name
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.ROBOT.pcba.terminal_id">
+            <summary>
+            站点ID
+            </summary>
+        </member>
+        <member name="T:MES_LINK_VSKY.models.VSKY.KitInput">
+            <summary>
+            KitInput
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.KitInput.panelID">
+            <summary>
+            大板SN
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.KitInput.reelID">
+            <summary>
+            料盘Reel No
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.KitInput.terminal_ID">
+            <summary>
+            int,站点ID
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.KitInput.cmd">
+            <summary>
+            命令参数，上传1检测禁用料，0不检测
+            </summary>
+        </member>
+        <member name="T:MES_LINK_VSKY.models.VSKY.user_password">
+            <summary>
+            user_password
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.user_password.username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.user_password.password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="T:MES_LINK_VSKY.models.VSKY.user_privilege">
+            <summary>
+            user_password
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.user_privilege.username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.user_privilege.program">
+            <summary>
+            程式
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.user_privilege.function">
+            <summary>
+            功能
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.user_privilege.authoritys">
+            <summary>
+            权限（Allow To Execute/Full Control/Allow To Change/Read Only）
+            </summary>
+        </member>
+        <member name="T:MES_LINK_VSKY.models.VSKY.kitreel">
+            <summary>
+            KitReel
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.kitreel.work_order">
+            <summary>
+            工单号,暂时可不输入
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.kitreel.reelID">
+            <summary>
+            料盘Reel No
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.kitreel.terminal_ID">
+            <summary>
+            int,站点ID
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.kitreel.cmd">
+            <summary>
+            命令参数，暂未启用
+            </summary>
+        </member>
+        <member name="T:MES_LINK_VSKY.models.VSKY.KitReponse">
+            <summary>
+            工单响应类
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.KitReponse.result">
+            <summary>
+            结果信息
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.KitReponse.message">
+            <summary>
+            回复信息
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.KitReponse.wo">
+            <summary>
+            工单号
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.KitReponse.woTarget">
+            <summary>
+            工单目标量
+            </summary>
+        </member>
+        <member name="P:MES_LINK_VSKY.models.VSKY.KitReponse.woProductName">
+            <summary>
+            工单料号
+            </summary>
+        </member>
+    </members>
+</doc>
